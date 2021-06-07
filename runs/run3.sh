@@ -1,13 +1,13 @@
-# MONO_DATASET='en:./newdata/PRETRAIN/en.train.pth,,;hi:./newdata/PRETRAIN/en.train.pth,,'
-# PARA_DATASET='en-hi:./newdata/PRETRAIN/XX.train.pth,./newdata/PRETRAIN/XX.valid.pth,./newdata/PRETRAIN/XX.test.pth'
-# PRETRAINED='./newdata/all.256.vec'
+# MONO_DATASET='en:./common/OPUS-EMT/en.train.pth,,;hi:./common/OPUS-EMT/hi.train.pth,,'
+# PARA_DATASET='en-hi:,./common/OPUS-EMT/XX.valid.pth,./common/OPUS-EMT/XX.test.pth'
+# PRETRAINED='./common/all.256.vec'
 
-MONO_DATASET='en:./newdata/combinedcs/combinedcs.en.train.pth,,;hi:./newdata/combinedcs/combinedcs.hi.train.pth,,'
-PARA_DATASET='en-hi:./newdata/combinedcs/combinedcs.XX.train.pth,./newdata/combinedcs/combinedcs.XX.valid.pth,./newdata/combinedcs/combinedcs.XX.test.pth'
-PRETRAINED='./newdata/all.256.vec'
+MONO_DATASET='en:./common/combinedcs/combinedcs.en.train.pth,,;hi:./common/combinedcs/combinedcs.hi.train.pth,,'
+PARA_DATASET='en-hi:./common/combinedcs/combinedcs.XX.train.pth,./common/combinedcs/combinedcs.XX.valid.pth,./common/combinedcs/combinedcs.XX.test.pth'
+PRETRAINED='./common/all.256.vec'
 
-CUDA_VISIBLE_DEVICES=3 python3 main.py \
---exp_name temp \
+CUDA_VISIBLE_DEVICES=1 python3 main.py \
+--exp_name opus_emt_combinedcs \
 --transformer True \
 --n_enc_layers 3 \
 --n_dec_layers 3 \
@@ -36,10 +36,10 @@ CUDA_VISIBLE_DEVICES=3 python3 main.py \
 --group_by_size True \
 --batch_size 16 \
 --epoch_size 10000 \
---stopping_criterion bleu_en_hi_valid,50 \
+--stopping_criterion bleu_en_hi_valid,10 \
 --freeze_enc_emb False \
 --freeze_dec_emb False \
---reload_model newdumped/C_combinedcs/best-bleu_en_hi_valid.pth \
+--reload_model finaldump/opus_emt_combinedcs/best-bleu_en_hi_valid.pth \
 --reload_enc True \
 --reload_dec True \
 --eval_only True 

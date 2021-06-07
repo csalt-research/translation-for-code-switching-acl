@@ -1,9 +1,9 @@
-MONO_DATASET='en:./newdata/combinedcs/combinedcs.en.train.pth,,;hi:./newdata/combinedcs/combinedcs.hi.train.pth,,'
-PARA_DATASET='en-hi:./newdata/combinedcs/combinedcs.XX.train.pth,./newdata/combinedcs/combinedcs.XX.valid.pth,./newdata/combinedcs/combinedcs.XX.test.pth'
-PRETRAINED='./newdata/all.256.vec'
+MONO_DATASET='en:./common/PRETRAIN_COMBINED/en.train.pth,,;hi:./common/PRETRAIN_COMBINED/hi.train.pth,,'
+PARA_DATASET='en-hi:./common/PRETRAIN_COMBINED/XX.train.pth,./common/PRETRAIN_COMBINED/XX.valid.pth,./common/PRETRAIN_COMBINED/XX.test.pth'
+PRETRAINED='./common/all.256.vec'
 
-CUDA_VISIBLE_DEVICES=0 python3 main.py \
---exp_name temp \
+CUDA_VISIBLE_DEVICES=3 python3 main.py \
+--exp_name pretrain_combined \
 --transformer True \
 --n_enc_layers 3 \
 --n_dec_layers 3 \
@@ -31,11 +31,11 @@ CUDA_VISIBLE_DEVICES=0 python3 main.py \
 --enc_optimizer adam,lr=0.0001 \
 --group_by_size True \
 --batch_size 16 \
---epoch_size 10000 \
---stopping_criterion bleu_hi_en_valid,50 \
+--epoch_size 100000 \
+--stopping_criterion bleu_en_hi_valid,5 \
 --freeze_enc_emb False \
---freeze_dec_emb False \
---reload_model newdumped/combinedcs/best-bleu_hi_en_valid.pth \
---reload_enc True \
---reload_dec True \
---eval_only True
+--freeze_dec_emb False
+# --eval_only True \
+# --reload_model dumped/opus_pretrain_temp/best-bleu_en_hi_valid.pth \
+# --reload_enc True \
+# --reload_dec True

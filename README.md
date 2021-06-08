@@ -24,6 +24,14 @@ data
 
 Please contact the authors for the PRETRAIN and Synthetic CS datasets created.
 
+#### Requirements and Tools
+
+The repository requires Moses, fastBPE and fastText tools for preprocessing. The `preprocessing_data.sh` scripts downloads these tools when it is run for the first time. 
+
+#### Preprocessing Input
+
+The input to the model are word-level tokens. Each of the data folder contains train, test and valid files for the language pair (Hi-En or Hi-CS). Run the `preprocessing_data.sh` script to generate the `*.pth` files. The preprocessing script also generates vocab files (vocal.hi, vocab.en, vocab.all) and fastText initialisation for embeddings.
+
 #### Model Architecture
 
 We follow the architecture from the repository [UnsupervisedMT](https://github.com/facebookresearch/UnsupervisedMT). The model comprises of three layers of stacked Transformer encoder and decoder layers, two of which are shared and the remaining layer is private to each language. Monolingual Hindi (i.e. the source language) has its own private encoder and decoder layers while English and Hindi-English CS text jointly make use of the remaining private encoder and decoder layers. In our model, the target language is either English or CS text.

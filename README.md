@@ -22,7 +22,7 @@ data
 |- AllCS
 ```
 
-Please contact the authors for the pretraining and Synthetic CS datasets created.
+Please contact the authors for the PRETRAIN and Synthetic CS datasets created.
 
 #### Model Architecture
 

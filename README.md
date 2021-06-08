@@ -2,15 +2,32 @@
 
 This is the official repository for the paper titled [From Machine Translation to Code-Switching: Generating High-Quality Code-Switched Text](TODO) accepted at ACL 2021.
 
-We follow the architecture from the repository [UnsupervisedMT](https://github.com/facebookresearch/UnsupervisedMT)
+#### Datasets
+
+There are 4 datasets used in the training - <br>
+| Data | Description |
+|:----:|:------------|
+| PRETRAIN | Hi-En parallel dataset comprising of sentence pairs from OpSub-{Hi,En} and IITB Hi-En Parallel dataset. |
+| OpSub-LEX | Hi-CS Synthetic dataset with LEX style of generation on OpSub-Hi |
+| OpSub-EMT | Hi-CS Synthetic dataset with EMT style of generation on OpSub-Hi |
+| AllCS | Real Hi-CS dataset |
+
+The directory structure for training is like this -
 
 ```
 data
-|- PRETRAIN_COMBINED
-|- OPUS-LEX
-|- OPUS-EMT
-|- combinedcs
+|- PRETRAIN
+|- OpSub-LEX
+|- OpSub-EMT
+|- AllCS
 ```
+
+Please contact the authors for the pretraining and Synthetic CS datasets created.
+
+#### Model Architecture
+
+We follow the architecture from the repository [UnsupervisedMT](https://github.com/facebookresearch/UnsupervisedMT). The model comprises of three layers of stacked Transformer encoder and decoder layers, two of which are shared and the remaining layer is private to each language. Monolingual Hindi (i.e. the source language) has its own private encoder and decoder layers while English and Hindi-English CS text jointly make use of the remaining private encoder and decoder layers. In our model, the target language is either English or CS text.
+
 
 #### Paper Abstract
 
